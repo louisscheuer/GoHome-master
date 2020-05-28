@@ -67,6 +67,7 @@ public class CatController : MonoBehaviour
         {
             _isPreparing = value;
             anim.SetBool("IsPreparing", value);
+
         }
     }
 
@@ -117,12 +118,9 @@ public class CatController : MonoBehaviour
 
         anim.speed = 0.1f;
 
-        //put this flip code elsewhere
-        var theScale = gameObject.transform.localScale;
-        theScale.x *= -1;
-        gameObject.transform.localScale = theScale;
-
         SetCatIdle(true);
+
+        // Flip();
     }
 
     // Update is called once per frame
@@ -172,7 +170,7 @@ public class CatController : MonoBehaviour
             }
             else if (Math.Abs(relativePosition) > spookDistance)
             {
-                //cat is prowling normally 
+                //cat is prowling normally
                 _catSpeed = walkingSpeed;
             }
 
@@ -277,8 +275,13 @@ public class CatController : MonoBehaviour
 
     private void StartRunningAway()
     {
+        if (!IsRunningAway)
+        {
+            // Flip();
+        }
         IsRunningAway = true;
         _catSpeed = runningSpeed;
+
     }
 
     private float GetPlayersRelativeXPostion(Rigidbody2D alienrb)
@@ -352,5 +355,12 @@ public class CatController : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void Flip()
+    {
+      var theScale = gameObject.transform.localScale;
+      theScale.x *= -1;
+      gameObject.transform.localScale = theScale;
     }
 }

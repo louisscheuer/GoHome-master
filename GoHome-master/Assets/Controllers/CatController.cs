@@ -121,6 +121,7 @@ public class CatController : MonoBehaviour
         SetCatIdle(true);
 
         // Flip();
+        // note
     }
 
     // Update is called once per frame
